@@ -22,7 +22,7 @@
                 "type":
                 {
                     "type": "string",
-                    "enum": ["image", "glossary", "images", "audio", "table", "bib", "video", "webpage", "embed"]
+                    "enum": ["image", "glossary", "images", "table", "bib", "video", "webpage", "embed"]
                 },
                 "title":
                 {
@@ -84,9 +84,6 @@
             "anyOf": [
             {
                 "$ref": "#/definitions/image"
-            },
-            {
-                "$ref": "#/definitions/audio"
             },
             {
                 "$ref": "#/definitions/table"
