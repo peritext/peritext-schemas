@@ -1,0 +1,20 @@
+{
+  "name": "peritext-schemas",
+  "version": "0.1.0",
+  "description": "Documentation and operationalization of schemas to use within the peritext ecosystem",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peritext/peritext-schemas.git"
+  },
+  "keywords": [
+    "json-schema",
+    "publishing"
+  ],
+  "author": "Robin de Mourat",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/peritext/peritext-schemas/issues"
+  },
+  "homepage": "https://github.com/peritext/peritext-schemas#readme"
+}

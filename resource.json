@@ -1,0 +1,297 @@
+{
+    "id": "resource",
+    "title": "Resource",
+    "description": "Default resources schemas of the peritext ecosystem",
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "object",
+    "properties":
+    {
+        "type":
+        {
+            "type": "string",
+            "enum": ["resource"],
+            "default": "resource",
+            "editable": false
+        },
+        "metadata":
+        {
+            "description": "metadata of the resource",
+            "type": "object",
+            "properties":
+            {
+                "type":
+                {
+                    "type": "string",
+                    "enum": ["image", "glossary", "images", "audio", "table", "bib", "video", "webpage", "embed"]
+                },
+                "title":
+                {
+                    "type": "string",
+                    "description": "Name of the resource",
+                    "default": ""
+                },
+                "authors":
+                {
+                    "type": "array",
+                    "description": "creators of the resource",
+                    "default": [],
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "given":
+                            {
+                                "type": "string",
+                                "default": ""
+                            },
+                            "family":
+                            {
+                                "type": "string",
+                                "default": ""
+                            },
+                            "role":
+                            {
+                                "type": "string",
+                                "default": ""
+                            }
+                        },
+                        "required": ["given", "family"]
+                    }
+                },
+                "description":
+                {
+                    "type": "string",
+                    "description": "description of the resource",
+                    "longString": true,
+                    "default": ""
+                },
+                "source":
+                {
+                    "type": "string",
+                    "description": "provenance of the resource",
+                    "longString": true,
+                    "default": ""
+                }
+            }
+        },
+        "data":
+        {
+            "default":
+            {},
+            "description": "data of the resource (depends on resource type)",
+            "anyOfFrom": "metadata.resourceType",
+            "anyOf": [
+            {
+                "$ref": "#/definitions/image"
+            },
+            {
+                "$ref": "#/definitions/audio"
+            },
+            {
+                "$ref": "#/definitions/table"
+            },
+            {
+                "$ref": "#/definitions/bib"
+            },
+            {
+                "$ref": "#/definitions/video"
+            },
+            {
+                "$ref": "#/definitions/webpage"
+            },
+            {
+                "$ref": "#/definitions/glossary"
+            }]
+        }
+    },
+    "required": ["type", "metadata", "data"],
+
+    "definitions":
+    {
+        "glossary":
+        {
+            "type": "object",
+            "properties":
+            {
+                "entryType": {
+                    "type": "string",
+                    "enum": ["person", "place", "event", "notion", "other"]
+                },
+                "name": {
+                    "type": "string",
+                    "longString": false
+                },
+                "givenName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string",
+                    "longString": true
+                },
+                "location":
+                {
+                    "type": "object",
+                    "description": "geolocalization the entry",
+                    "properties":
+                    {
+                        "latitude":
+                        {
+                            "type": "number"
+                        },
+                        "longitude":
+                        {
+                            "type": "number"
+                        },
+                        "address":
+                        {
+                            "type": "string"
+                        }
+                    }
+                },
+                "dates": {
+                    "type": "object",
+                    "description": "date bounds of the entry",
+                    "properties": {
+                        "start": {
+                            "type": "number"
+                        },
+                        "end": {
+                            "type": "number"
+                        }
+                    }
+                }
+            },
+            "showMetadata": false,
+            "titlePath": ["data", "name"],
+            "additionalProperties": false
+        },
+        "image":
+        {
+            "type": "object",
+            "properties": {
+                "images": {
+                    "type": "array",
+                    "default": [{}],
+                    "items":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "rgbImageAssetId":
+                            {
+                                "type": "string",
+                                "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                                "description": "rgb/rvb image asset uuid of the resource",
+                                "acceptMimetypes": ["image/png","image/svg+xml", "image/jpeg", "image/jpg", "image/gif"]
+                            },
+                            "cmybImageAssetId":
+                            {
+                                "type": "string",
+                                "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                                "description": "cmyb/cmjn image asset uuid of the resource",
+                                "acceptMimetypes": ["image/png","image/svg+xml", "image/jpeg", "image/jpg", "image/gif"]
+                            },
+                            "caption": {
+                                "type": "string",
+                                "description": "image-specific caption"
+                            }
+                        }
+                    }
+                }
+            },
+            "showMetadata": true,
+            "additionalProperties": false
+        },
+        "table":
+        {
+          "type": "object",
+          "properties": {
+            "dataAssetId":
+            {
+              "type": "string",
+              "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+              "description": "data asset uuid of the resource",
+              "acceptMimetypes": ["text/csv", "text/tsv", "text/tab-separated-values", "text/comma-separated-values"]
+            }
+          },
+          "showMetadata": true,
+          "additionalProperties": false
+        },
+        "video":
+        {
+          "type": "object",
+          "showMetadata": true,
+          "properties": {
+            "mediaUrl": {
+              "type": "string",
+              "description": "url of the video"
+            },
+            "rgbImageAssetId":
+            {
+                "type": "string",
+                "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                "description": "rgb/rvb image asset uuid of the resource",
+                "acceptMimetypes": ["image/png","image/svg+xml", "image/jpeg", "image/jpg", "image/gif"]
+            },
+            "cmybImageAssetId":
+            {
+                "type": "string",
+                "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                "description": "cmyb/cmjn image asset uuid of the resource",
+                "acceptMimetypes": ["image/png","image/svg+xml", "image/jpeg", "image/jpg", "image/gif"]
+            }
+          },
+          "additionalProperties": false
+        },
+        "embed":
+        {
+          "type": "object",
+          "showMetadata": true,
+          "properties": {
+            "html": {
+              "type": "string",
+              "longString": true,
+
+              "description": "embed code of the resource"
+            },
+            "rgbImageAssetId":
+            {
+                "type": "string",
+                "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                "description": "rgb/rvb image asset uuid of the resource",
+                "acceptMimetypes": ["image/png","image/svg+xml", "image/jpeg", "image/jpg", "image/gif"]
+            },
+            "cmybImageAssetId":
+            {
+                "type": "string",
+                "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                "description": "cmyb/cmjn image asset uuid of the resource",
+                "acceptMimetypes": ["image/png","image/svg+xml", "image/jpeg", "image/jpg", "image/gif"]
+            }
+          },
+          "additionalProperties": false
+        },
+        "bib":
+        {
+          "type": "array",
+          "titlePath": ["data", 0, "title"],
+          
+          "metadataEditable": false,
+          "showAssetPreview": true
+        },
+        "webpage":
+        {
+          "type": "object",
+          "properties": {
+            "url":
+            {
+              "type": "string",
+              "description": "url of the webpage view"
+            }
+          },
+          "additionalProperties": false,
+          "showMetadata": true
+        }
+    }
+}
