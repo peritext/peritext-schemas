@@ -312,6 +312,10 @@
                             "type": "string",
                             "description": "The description of the edition"
                         },
+                        "date": {
+                            "type": "string",
+                            "description": "The displayed date of publication of the edition"
+                        },
                         "type": {
                             "type": "string",
                             "description": "The rendering type of the edition",
@@ -349,6 +353,29 @@
                         "publicationTitle": {
                             "type": "string",
                             "description": "A specific title to display as the title of the edition"
+                        },
+                        "publicationAuthors": {
+                          "type": "array",
+                          "description": "Specific authors of this edition",
+                          "default": [],
+                          "items": {
+                            "type": ["object", "string"],
+                            "properties": {
+                              "given": {
+                                "type": "string"
+                              },
+                              "family": {
+                                "type": "string"
+                              },
+                              "affiliation": {
+                                "type": "string"
+                              },
+                              "role": {
+                                "type": "string"
+                              }
+                              
+                            }
+                          }
                         },
                         "publicationSubtitle": {
                             "type": "string",
@@ -443,6 +470,7 @@
 
             }
         },
+
         "metadata": {
             "type": "object",
             "properties": {
@@ -485,26 +513,6 @@
                 "description": {
                   "type": "string",
                   "default": ""
-                },
-                "keywords": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "default": []
-                },
-                "covers": {
-                  "type": "object",
-                  "description": "cover urls of the item",
-                  "default": {},
-                  "properties": {
-                    "web": {
-                      "type": "string"
-                    },
-                    "codex": {
-                      "type": "string"
-                    }
-                  }
                 },
                 "level": {
                   "type": "number",
