@@ -99,6 +99,9 @@
             },
             {
                 "$ref": "#/definitions/glossary"
+            },
+            {
+                "$ref": "#/definitions/embed"
             }]
         }
     },
