@@ -198,45 +198,7 @@
     "required": ["type", "metadata", "sectionsOrder", "resources", "contextualizers", "assets", "contextualizations"],
 
     "definitions": {
-        "contents": {
-            "type": "object",
-            "properties": {
-                "contents": {
-                    "description": "representation of main contents",
-                    "$ref": "#/definitions/draftRawContents"
-                },
-                "notes": {
-                    "type": "object",
-                    "description": "map of notes commenting a section",
-                    "default": {},
-                    "patternProperties": {
-                        "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string",
-                                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
-                                    "description": "id of the note (uuid v4)"
-                                },
-                                "order": {
-                                    "type": "number",
-                                    "description": "order of the note"
-                                },
-                                "contents": {
-                                    "description": "representation of the note content",
-                                    "$ref": "#/definitions/draftRawContents"
-                                }
-                            }
-                        }
-                    }
-                },
-                "notesOrder": {
-                    "type": "array",
-                    "description": "Order of the notes commenting the main contents",
-                    "default": []
-                }
-            }
-        },
+        
         "asset": {
             "type": "object",
             "properties": {
@@ -605,72 +567,6 @@
                     "description": "legend of the contextualization",
                     "default": ""
                 }
-            }
-        },
-        "draftRawContents": {
-            "type": "object",
-            "properties": {
-                "entityMap": {
-                    "type": "object",
-                    "description": "List of entities annotating the contents",
-                    "default": {},
-                    "patternProperties": {
-                        "^[a-zA-Z0-9]*$": {
-                            "properties": {
-                                "type": {
-                                    "type": "string",
-                                    "description": "Custom type of the entity (examples in peritext: INLINE_ASSET, BLOCK_ASSET, NOTE_POINTER)"
-                                },
-                                "mutability": {
-                                    "type": "string",
-                                    "description": "Whether the entity is editable in a draft-js editor"
-                                },
-                                "data": {
-                                    "type": "object",
-                                    "description": "data to embed in the entity"
-                                }
-                            }
-                        }
-                    }
-                },
-
-                "blocks": {
-                    "type": "array",
-                    "description": "List of contents blocks of the item",
-                    "default": [],
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "key": {
-                                "type": "string",
-                                "description": "identifier of the block"
-                            },
-                            "text": {
-                                "type": "string",
-                                "description": "Text of the block"
-                            },
-                            "type": {
-                                "type": "string",
-                                "description": "Type of block (atomic, ...)"
-                            },
-                            "depth": {
-                                "type": "number"
-                            },
-                            "inlineStyleRanges": {
-                                "type": "array",
-                                "description": "list of styling annotations"
-                            },
-                            "entityRanges": {
-                                "type": "array",
-                                "description": "List of entities mentions"
-                            },
-                            "data": {
-                                "type": "object"
-                            }
-                        }
-                    }
-                }
-
             }
         }
     }
