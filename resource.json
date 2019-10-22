@@ -22,7 +22,7 @@
                 "type":
                 {
                     "type": "string",
-                    "enum": ["image", "glossary", "images", "table", "bib", "video", "webpage", "embed"]
+                    "enum": ["section", "image", "glossary", "images", "table", "bib", "video", "webpage", "embed"]
                 },
                 "title":
                 {

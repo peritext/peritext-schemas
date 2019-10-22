@@ -73,40 +73,6 @@
                         "metadata": {
                             "type": "object",
                             "$ref": "#/definitions/metadata"
-                        },
-                        "contents": {
-                            "description": "representation of the section content",
-                            "$ref": "#/definitions/draftRawContents"
-                        },
-                        "notes": {
-                            "type": "object",
-                            "description": "map of notes commenting a section",
-                            "default": {},
-                            "patternProperties": {
-                                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
-                                            "description": "id of the note (uuid v4)"
-                                        },
-                                        "order": {
-                                            "type": "number",
-                                            "description": "order of the note"
-                                        },
-                                        "contents": {
-                                            "description": "representation of the note content",
-                                            "$ref": "#/definitions/draftRawContents"
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "notesOrder": {
-                            "type": "array",
-                            "description": "Order of the notes commenting the main contents",
-                            "default": []
                         }
                     }
                 }
@@ -229,9 +195,48 @@
             }
         }
     },
-    "required": ["type", "metadata", "sections", "sectionsOrder", "resources", "contextualizers", "assets", "contextualizations"],
+    "required": ["type", "metadata", "sectionsOrder", "resources", "contextualizers", "assets", "contextualizations"],
 
     "definitions": {
+        "contents": {
+            "type": "object",
+            "properties": {
+                "contents": {
+                    "description": "representation of main contents",
+                    "$ref": "#/definitions/draftRawContents"
+                },
+                "notes": {
+                    "type": "object",
+                    "description": "map of notes commenting a section",
+                    "default": {},
+                    "patternProperties": {
+                        "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                                    "description": "id of the note (uuid v4)"
+                                },
+                                "order": {
+                                    "type": "number",
+                                    "description": "order of the note"
+                                },
+                                "contents": {
+                                    "description": "representation of the note content",
+                                    "$ref": "#/definitions/draftRawContents"
+                                }
+                            }
+                        }
+                    }
+                },
+                "notesOrder": {
+                    "type": "array",
+                    "description": "Order of the notes commenting the main contents",
+                    "default": []
+                }
+            }
+        },
         "asset": {
             "type": "object",
             "properties": {
@@ -291,7 +296,7 @@
                         "mode": "merge",
                         "css": ""
                     },
-                    "additionalHTML": ""
+                    "additionalHTML": "",
                     "allowAnnotation": false
                 }
             }, 
@@ -574,10 +579,10 @@
                     "type": "string",
                     "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
                 },
-                "resourceId": {
+                "sourceId": {
                     "type": "string"
                 },
-                "sectionId": {
+                "targetId": {
                     "type": "string"
                 },
                 "contextualizerId": {
