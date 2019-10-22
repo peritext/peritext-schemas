@@ -292,6 +292,7 @@
                         "css": ""
                     },
                     "additionalHTML": ""
+                    "allowAnnotation": false
                 }
             }, 
             "properties": {
@@ -403,6 +404,10 @@
                         "templateOptions": {
                             "type": "object",
                             "description": "Map of options for a given template"
+                        },
+                        "allowAnnotation": {
+                            "type": "boolean",
+                            "description": "Whether to allow annotation"
                         },
                         "citationStyle": {
                             "type": "object",
