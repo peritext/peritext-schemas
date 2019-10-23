@@ -173,7 +173,7 @@
                     }
                 },
                 "contents": {
-                    "ref": "#/definitions/contents"
+                    "type": "object"
                 }
             },
             "showMetadata": false,
@@ -214,7 +214,7 @@
                     }
                 },
                 "contents": {
-                    "$ref": "#/definitions/contents"
+                    "type": "object"
                 }
             },
             "showMetadata": true,
@@ -232,7 +232,7 @@
               "acceptMimetypes": ["text/csv", "text/tsv", "text/tab-separated-values", "text/comma-separated-values"]
             },
             "contents": {
-                "$ref": "#/definitions/contents"
+                "type": "object"
             }
           },
           "showMetadata": true,
@@ -262,7 +262,7 @@
                 "acceptMimetypes": ["image/png","image/svg+xml", "image/jpeg", "image/jpg", "image/gif"]
             },
             "contents": {
-                "$ref": "#/definitions/contents"
+                "type": "object"
             }
           },
           "additionalProperties": false
@@ -293,15 +293,23 @@
                 "acceptMimetypes": ["image/png","image/svg+xml", "image/jpeg", "image/jpg", "image/gif"]
             },
             "contents": {
-                "$ref": "#/definitions/contents"
+                "type": "object"
             }
           },
           "additionalProperties": false
         },
         "bib":
         {
-          "type": "array",
-          "titlePath": ["data", 0, "title"],
+          "type": "object",
+          "properties": {
+            "contents": {
+                "type": "object"
+            },
+            "citations": {
+                "type": "array"
+            }
+          },
+          "titlePath": ["data", "citations", 0, "title"],
           
           "metadataEditable": false,
           "showAssetPreview": true
@@ -316,7 +324,7 @@
               "description": "url of the webpage view"
             },
             "contents": {
-                "$ref": "#/definitions/contents"
+                "type": "object"
             }
           },
           "additionalProperties": false,

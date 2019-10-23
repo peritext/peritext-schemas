@@ -47,45 +47,21 @@
             "default": {}
         },
 
-        "sections": {
-            "type": "object",
-            "description": "map of sections displayed in the production",
-            "default": {},
-            "patternProperties": {
-                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}": {
-                    "type": "object",
-                    "default": {
-                        "metadata": {
-                            "title": "",
-                            "authors": [],
-                            "level": 0
-                        },
-                        "contents": {},
-                        "notes": {},
-                        "notesOrder": []
-                    },
-                    "properties": {
-                        "id": {
-                            "type": "string",
-                            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
-                            "description": "id of the section (uuid v4)"
-                        },
-                        "metadata": {
-                            "type": "object",
-                            "$ref": "#/definitions/metadata"
-                        }
-                    }
-                }
-            }
-        },
-
         "sectionsOrder": {
             "type": "array",
             "items": {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                    "resourceId": {
+                        "type": "string"
+                    },
+                    "level": {
+                        "type": "number"
+                    }
+                }
             },
             "default": [],
-            "description": "order of the sections to display in the production"
+            "description": "default order of the sections to display in the production"
         },
 
         "resources": {
@@ -507,7 +483,7 @@
                         "type": {
                             "type": "string",
                             "description": "type of the resource",
-                            "enum": ["image", "data-presentation", "table", "video", "embed", "glossary", "bib", "webpage"]
+                            "enum": ["image",  "table", "video", "embed", "glossary", "bib", "webpage", "section"]
                         }
                     }
                 },
