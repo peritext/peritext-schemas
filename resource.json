@@ -117,13 +117,15 @@
                 "$ref": "#/definitions/contents"
             }
           },
+          "titlePath": ["metadata", "title"],
           "additionalProperties": false,
           "showMetadata": true
         },
         "glossary":
         {
             "type": "object",
-            "properties":
+          "titlePath": ["data", "name"],
+          "properties":
             {
                 "entryType": {
                     "type": "string",
