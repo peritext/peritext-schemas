@@ -129,7 +129,7 @@
             {
                 "entryType": {
                     "type": "string",
-                    "enum": ["person", "place", "event", "notion", "other"]
+                    "enum": [ "notion", "place", "event", "person", "other"]
                 },
                 "name": {
                     "type": "string",
