@@ -11,7 +11,10 @@
             "default": "production",
             "editable": false
         },
-
+        "schemaVersion": {
+            "type": "string",
+            "default": "0.2.2"
+        },
         "id": {
             "type": "string",
             "description": "id of the production (uuid v4)",
