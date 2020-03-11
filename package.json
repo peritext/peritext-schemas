@@ -1,6 +1,6 @@
 {
   "name": "peritext-schemas",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Documentation and operationalization of schemas to use within the peritext ecosystem",
   "main": "index.js",
   "repository": {
