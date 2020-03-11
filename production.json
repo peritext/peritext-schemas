@@ -37,6 +37,18 @@
             },
             "default": {}
         },
+        
+        "tags":
+        {
+            "type": "object",
+            "description": "map of tags used in the production",
+            "patternProperties": {
+                "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}": {
+                    "$ref": "#/definitions/tag"
+                }
+            },
+            "default": {}
+        },
 
         "editions": 
         {
@@ -183,7 +195,7 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "self-identifying id of the dataset (uuid v4)",
+                    "description": "self-identifying id of the asset (uuid v4)",
                     "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
                 },
 
@@ -204,6 +216,27 @@
 
             }
         },
+        
+        "tag": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "self-identifying id of the tag (uuid v4)",
+                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                },
+
+                "name": {
+                    "type": "string",
+                    "description": "The tag name"
+                },
+
+                "color": {
+                    "type": "string",
+                    "description": "The tag color"
+                }
+            }
+        },
 
         "summaryBlock": {
             "type": "object",
@@ -219,6 +252,7 @@
                 }
             }
         },
+        
         "edition": {
             "type": "object",
             "default": {
