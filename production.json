@@ -13,7 +13,7 @@
         },
         "schemaVersion": {
             "type": "string",
-            "default": "0.2.2"
+            "default": "0.2.4"
         },
         "id": {
             "type": "string",
